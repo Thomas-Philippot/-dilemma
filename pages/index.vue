@@ -8,7 +8,7 @@
         <v-card-text>
           <v-row>
             <v-col>
-              <p>Tu veut rjoindre une game ? saisie le pin pour jouer</p>
+              <p>Tu veut rejoindre une game ? saisie le pin pour jouer</p>
             </v-col>
           </v-row>
           <v-row>
