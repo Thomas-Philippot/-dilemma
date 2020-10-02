@@ -80,11 +80,7 @@ export default {
   methods: {
     createGame () {
       if (this.validate()) {
-        const partyRef = this.$fireDb.ref('parties/0')
-        partyRef.on('value', (snapshot) => {
-          // eslint-disable-next-line no-console
-          console.log(snapshot.val())
-        })
+        alert('good')
       }
     },
     validate () {
