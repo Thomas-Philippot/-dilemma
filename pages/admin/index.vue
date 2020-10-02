@@ -8,17 +8,10 @@
         <v-card-text>
           <v-row>
             <v-col>
-              <p>Tu veut rejoindre une game ? saisie le pin pour jouer</p>
+              <p>Saise le PIN de la game que tu souhaite administrer</p>
             </v-col>
           </v-row>
           <v-row>
-            <v-col>
-              <v-text-field
-                v-model="username"
-                label="Nom"
-                solo
-              />
-            </v-col>
             <v-col>
               <v-text-field
                 v-model="slug"
@@ -32,25 +25,10 @@
                 large
                 color="primary"
                 nuxt
-                :to="`game/${ slug }`"
+                :to="`admin/${ slug }`"
                 :disabled="slug === null || slug === ''"
               >
                 Go
-              </v-btn>
-            </v-col>
-          </v-row>
-        </v-card-text>
-      </v-card>
-      <v-card class="mt-4">
-        <v-card-title>Créer une game</v-card-title>
-        <v-card-text>
-          <v-row>
-            <v-col>
-              <h3>Tu souhaite creer une game ?</h3>
-            </v-col>
-            <v-col md="2">
-              <v-btn color="primary" nuxt to="/creation">
-                Creer
               </v-btn>
             </v-col>
           </v-row>

@@ -57,21 +57,23 @@ export default {
   created () {
     this.partyRef = this.$fireDb.ref(`parties/${this.slug}`)
     this.partyRef.on('value', (snapshot) => {
-      this.$nextTick(() => {
-        this.party = snapshot.val()
-      })
+      this.party = snapshot.val()
+      if (!('answers' in this.party)) {
+        this.party.answers = []
+      }
     })
   },
   methods: {
     choose (i) {
       i--
-      // eslint-disable-next-line no-console
-      console.log('choosed')
       const answer = {
         name: 'thomas',
-        answer: i
+        answer: i,
+        index: this.party.current
       }
-      if (this.canAnswer('thomas')) {
+      if (this.canAnswer(this.username)) {
+        // eslint-disable-next-line no-console
+        console.log('add answer')
         this.party.answers.push(answer)
       }
       this.partyRef.set(this.party)

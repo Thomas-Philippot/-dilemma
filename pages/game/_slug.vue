@@ -38,6 +38,11 @@ export default {
       joined: false
     }
   },
+  computed: {
+    username () {
+      return this.$store.state.user.username
+    }
+  },
   created () {
     this.partyRef = this.$fireDb.ref(`parties/${this.slug}`)
     this.partyRef.on('value', (snapshot) => {
@@ -45,12 +50,15 @@ export default {
       if (this.party.status === 'START') {
         this.$router.push(`/playing/${this.slug}`)
       }
+      if (!('users' in this.party)) {
+        this.party.users = []
+      }
     })
   },
   methods: {
     join () {
-      if (this.canJoin({ name: 'Thomas' })) {
-        this.party.users.push({ name: 'Thomas' })
+      if (this.canJoin({ name: this.username })) {
+        this.party.users.push({ name: this.username })
         this.joined = true
       }
       this.partyRef.set(this.party)
