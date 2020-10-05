@@ -19,7 +19,7 @@
         fa-user-cog
       </v-icon>
     </v-btn>
-    <v-menu offset-y>
+    <v-menu v-if="avatar !== null" offset-y>
       <template v-slot:activator="{ on }">
         <v-btn icon class="mx-2" v-on="on">
           <v-avatar size="45">

@@ -8,12 +8,12 @@
             <v-card-text>
               <p>Avant de commencer saisie ton nom puis choisie un avatar</p>
               <v-row>
-                <v-col v-if="avatar !== null" sx="1" md="1">
+                <v-col v-if="avatar !== null" cols="12" sm="3" md="3">
                   <v-avatar size="56">
                     <v-img :src="avatar" alt="avatar" />
                   </v-avatar>
                 </v-col>
-                <v-col>
+                <v-col cols="12" sm="8" md="8">
                   <v-text-field
                     v-model="username"
                     :readonly="avatar !== null"
@@ -29,7 +29,7 @@
                     chips
                     solo
                     label="Avatar"
-                    truncate-length="50"
+                    truncate-length="30"
                     prepend-icon="fa-user-circle"
                     accept="image/jpeg"
                   >
@@ -66,6 +66,9 @@
             </v-card-text>
             <v-card-actions>
               <v-spacer />
+              <v-btn color="secondary" outlined @click="reset">
+                Reset
+              </v-btn>
               <v-btn color="primary" nuxt to="/main" :disabled="username === ''">
                 Commencer
               </v-btn>
@@ -126,6 +129,10 @@ export default {
       task.on('state_changed', (response) => {
         this.progression = (response.bytesTransferred / response.totalBytes) * 100
       })
+    },
+    reset () {
+      this.username = ''
+      this.avatar = null
     }
   }
 }
