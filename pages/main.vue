@@ -12,17 +12,15 @@
             </v-col>
           </v-row>
           <v-row>
-            <v-col>
+            <v-col cols="12" xs="10" md="10">
               <v-text-field
                 v-model="slug"
                 solo
                 label="Game PIN"
               />
             </v-col>
-            <v-spacer />
-            <v-col cols="12" xs="2" md="2">
+            <v-col cols="12" xs="2" md="2" class="text-right">
               <v-btn
-                outlined
                 large
                 color="primary"
                 nuxt
@@ -42,13 +40,14 @@
             <v-col>
               <h3>Tu souhaite creer une game ?</h3>
             </v-col>
-            <v-col md="2">
-              <v-btn color="primary" nuxt to="/creation">
-                Creer
-              </v-btn>
-            </v-col>
           </v-row>
         </v-card-text>
+        <v-card-actions>
+          <v-spacer />
+          <v-btn color="primary" nuxt to="/creation">
+            Creer
+          </v-btn>
+        </v-card-actions>
       </v-card>
     </v-col>
   </v-row>
