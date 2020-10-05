@@ -31,9 +31,23 @@
           </v-progress-linear>
         </v-col>
       </v-row>
+      <v-list>
+        <template v-for="(item, id) in party.answers">
+          <v-list-item v-if="item.index === party.current" :key="id">
+            <v-list-item-avatar>
+              <v-avatar size="56">
+                <v-img :src="getImage(item.name)" alt="avatar" />
+              </v-avatar>
+            </v-list-item-avatar>
+            <v-list-item-content>
+              {{ item.name }}
+            </v-list-item-content>
+          </v-list-item>
+        </template>
+      </v-list>
       <v-row>
         <v-col>
-          <v-btn @click="next" color="primary">
+          <v-btn color="primary" @click="next">
             Next
           </v-btn>
         </v-col>
@@ -137,6 +151,11 @@ export default {
     },
     currentSecondAnswers (index) {
       return this.party.answers.filter(item => item.index === index).filter(item => item.answer === 1).length
+    },
+    getImage (name) {
+      this.$fireStorage.ref().child(`${name}.png`).getDownloadURL().then((response) => {
+        return response
+      })
     }
   }
 }

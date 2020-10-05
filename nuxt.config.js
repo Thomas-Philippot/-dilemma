@@ -1,4 +1,5 @@
 import colors from 'vuetify/es5/util/colors'
+require('dotenv').config()
 
 export default {
   // Disable server-side rendering (htt/ps:/go.nuxtjs.dev/ssr-mode)
@@ -24,6 +25,7 @@ export default {
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
+    '~/plugins/persistedState'
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -34,7 +36,8 @@ export default {
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/vuetify
-    '@nuxtjs/vuetify'
+    '@nuxtjs/vuetify',
+    '@nuxtjs/dotenv'
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
@@ -43,7 +46,7 @@ export default {
     '@nuxtjs/pwa',
     '@nuxtjs/firebase'
   ],
-
+  dotenv: {},
   // Vuetify module configuration (https://go.nuxtjs.dev/config-vuetify)
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
@@ -66,17 +69,18 @@ export default {
   },
   firebase: {
     config: {
-      apiKey: 'AIzaSyAWyRPJNGKOo7zNziFCu8ty2Z2SPf_MhFQ',
-      authDomain: 'tu-prefere.firebaseapp.com',
-      databaseURL: 'https://tu-prefere.firebaseio.com',
-      projectId: 'tu-prefere',
-      storageBucket: 'tu-prefere.appspot.com',
-      messagingSenderId: '873915894080',
-      appId: '1:873915894080:web:f27a766418bd8c0979d2a5',
-      measurementId: 'G-9RERQHXPG1'
+      apiKey: process.env.FIREBASE_API_KEY,
+      authDomain: process.env.FIREABSE_AUTH_DOMAIN,
+      databaseURL: process.env.FIREBASE_DATABASE_URL,
+      projectId: process.env.FIREBASE_PROJECT_ID,
+      storageBucket: process.env.FIREBASE_STORAGE_BUKKET,
+      messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+      appId: process.env.FIREBASE_APP_ID,
+      measurementId: process.env.FIREBASE_MEASUREMENT_ID
     },
     services: {
-      realtimeDb: true
+      realtimeDb: true,
+      storage: true
     }
   },
 
