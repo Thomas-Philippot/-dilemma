@@ -35,8 +35,8 @@
         <template v-for="(item, id) in party.answers">
           <v-list-item v-if="item.index === party.current" :key="id">
             <v-list-item-avatar>
-              <v-avatar size="56">
-                <v-img :src="getImage(item.name)" alt="avatar" />
+              <v-avatar>
+                <v-img :src="images[item.name]" alt="avatar" />
               </v-avatar>
             </v-list-item-avatar>
             <v-list-item-content>
@@ -106,6 +106,7 @@ export default {
           }
         ]
       },
+      images: [],
       partyRef: null,
       recap: false
     }
@@ -122,6 +123,21 @@ export default {
     },
     strenght () {
       return this.party.users.length
+    }
+  },
+  watch: {
+    party: {
+      deep: true,
+      handler (newValue) {
+        for (let i = 0; i < newValue.answers.length; i++) {
+          const item = newValue.answers[i]
+          // eslint-disable-next-line no-console
+          console.log(newValue.answers[i])
+          this.$fireStorage.ref().child(`${item.name}.jpg`).getDownloadURL().then((response) => {
+            this.images[item.name] = response
+          })
+        }
+      }
     }
   },
   created () {
@@ -152,8 +168,8 @@ export default {
     currentSecondAnswers (index) {
       return this.party.answers.filter(item => item.index === index).filter(item => item.answer === 1).length
     },
-    getImage (name) {
-      this.$fireStorage.ref().child(`${name}.png`).getDownloadURL().then((response) => {
+    getImage (item) {
+      this.$fireStorage.ref().child(`${item.name}.jpg`).getDownloadURL().then((response) => {
         return response
       })
     }
