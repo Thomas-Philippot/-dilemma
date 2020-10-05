@@ -74,6 +74,9 @@
         </v-col>
       </v-row>
     </v-col>
+    <v-snackbar :value="snack" color="error" timeout="60000">
+      {{ error }}
+    </v-snackbar>
   </v-row>
 </template>
 
@@ -81,6 +84,8 @@
 export default {
   data () {
     return {
+      snack: false,
+      error: '',
       file: null,
       uploading: false,
       progression: null
@@ -112,6 +117,9 @@ export default {
       task.then(() => {
         this.$fireStorage.ref().child(path).getDownloadURL().then((response) => {
           this.avatar = response
+        }).catch((e) => {
+          this.snack = true
+          this.error = e.message
         })
         this.uploading = false
       })
