@@ -22,14 +22,15 @@
                   />
                 </v-col>
               </v-row>
-              <v-row v-if="avatar === null && username !== ''">
-                <v-col>
+              <v-row v-if="avatar === null && username !== ''" justify="space-between">
+                <v-col cols="12" xs="8" md="8">
                   <v-file-input
                     v-model="file"
                     chips
                     solo
                     label="Avatar"
-                    truncate-length="15"
+                    truncate-length="50"
+                    prepend-icon="fa-user-circle"
                     accept="image/jpeg"
                   >
                     <template v-slot:selection="{ index, text }">
@@ -44,9 +45,8 @@
                     </template>
                   </v-file-input>
                 </v-col>
-                <v-spacer />
-                <v-col cols="12" xs="2" md="2">
-                  <v-btn :disabled="(file === null)" @click="upload">
+                <v-col cols="12" xs="3" md="3" class="text-right">
+                  <v-btn :disabled="(file === null)" large outlined color="secondary" @click="upload">
                     Upload
                   </v-btn>
                 </v-col>
@@ -66,7 +66,7 @@
             </v-card-text>
             <v-card-actions>
               <v-spacer />
-              <v-btn color="primary" nuxt to="/main">
+              <v-btn color="primary" nuxt to="/main" :disabled="username === ''">
                 Commencer
               </v-btn>
             </v-card-actions>
