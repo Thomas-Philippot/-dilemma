@@ -30,7 +30,7 @@
                     solo
                     label="Avatar"
                     truncate-length="15"
-                    accept="image/png"
+                    accept="image/jpeg"
                   >
                     <template v-slot:selection="{ index, text }">
                       <v-chip
@@ -107,7 +107,7 @@ export default {
   methods: {
     upload () {
       this.uploading = true
-      const path = `${this.username}.png`
+      const path = `${this.username}.jpg`
       const task = this.$fireStorage.ref().child(path).put(this.file)
       task.then(() => {
         this.$fireStorage.ref().child(path).getDownloadURL().then((response) => {
